@@ -6,6 +6,11 @@ dist/
 __pycache__/
 *.log
 
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.auth/
+
 # OS / editor
 .DS_Store
 .idea/

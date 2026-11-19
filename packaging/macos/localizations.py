@@ -1,7 +1,7 @@
 """Bundle language declarations and OS-owned permission prompt resources."""
 import plistlib
 
-DECLARATIONS = {'CFBundleDevelopmentRegion': 'en', 'CFBundleLocalizations': ['en', 'zh-Hans', 'ja', 'ko']}
+DECLARATIONS = {'CFBundleDevelopmentRegion': 'en', 'CFBundleLocalizations': ['en', 'zh-Hans', 'ja', 'ko', 'zh-Hant']}
 STRINGS = {
     'en': {
         'CFBundleName': 'Oink',
@@ -31,6 +31,13 @@ STRINGS = {
         'NSMicrophoneUsageDescription': 'Oink는 다른 기기가 사용하는 동안에만 마이크를 공유합니다.',
         'NSLocalNetworkUsageDescription': 'Oink는 로컬 네트워크에서 기기를 찾아 연결합니다.',
     },
+    'zh-Hant': {
+        'CFBundleName': 'Oink',
+        'CFBundleDisplayName': 'Oink',
+        'NSAudioCaptureUsageDescription': 'Oink 會與你選擇的裝置共享系統音訊。',
+        'NSMicrophoneUsageDescription': 'Oink 只在其他裝置使用時共享你的麥克風。',
+        'NSLocalNetworkUsageDescription': 'Oink 會在區域網路中尋找並連接你的裝置。',
+    },
 }
 
 
@@ -51,7 +58,7 @@ def write_localizations(bundle, permissions=False):
 
 def verify_localizations(bundle, info, permissions=False):
     if any(info.get(key) != value for key, value in DECLARATIONS.items()):
-        raise RuntimeError('Mac bundle must declare the en, zh-Hans, ja and ko localizations')
+        raise RuntimeError('Mac bundle must declare the en, zh-Hans, ja, ko and zh-Hant localizations')
     for language in STRINGS:
         resource = bundle / 'Contents/Resources' / (language + '.lproj') / 'InfoPlist.strings'
         if not resource.is_file() or plistlib.loads(resource.read_bytes()) != localized_strings(language, permissions):

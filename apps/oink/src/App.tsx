@@ -735,7 +735,7 @@ export function App() {
       </DesktopWindow>
     </SideContextMenu>;
     // oink-ui ships built-in component strings (default aria labels, key names)
-    // in zh-CN and en-US only; Japanese and Korean use its English strings.
+    // in zh-CN and en-US only; Traditional Chinese, Japanese and Korean use its English strings.
     return <OinkProvider locale={language === 'zh-Hans' ? 'zh-CN' : 'en-US'} defaultAccent={DEFAULT_ACCENT.value}>
     <AppearanceSync local={prefs.local} presentation={prefs.presentation}/><div className="oink-app" data-package-drag={view==='main'&&packageDrag?'':undefined} data-view={view} data-platform={platform} data-edge-to-edge={maximized ? '' : undefined}>
       {view === 'main' && <div className="win-shadow" aria-hidden="true"><div className="win-shadow__shape"/></div>}

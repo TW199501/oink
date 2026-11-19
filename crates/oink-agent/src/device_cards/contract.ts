@@ -259,7 +259,7 @@ export type BlockedDeviceReply = BlockEdited | BlockListError;
 
 export interface UiPreferences {
   notification_level: "disabled" | "minimal" | "default" | "verbose";
-  ui_language: "auto" | "zh-Hans" | "en" | "ja" | "ko";
+  ui_language: "auto" | "zh-Hans" | "zh-Hant" | "en" | "ja" | "ko";
   theme_mode: "system" | "light" | "dark";
   theme_accent: { light: string; dark: string }; // validated opaque #RRGGBB
   show_status_icon: boolean;

@@ -29,6 +29,8 @@ struct MenuCatalog {
     zh_hans: MenuLabels,
     ja: MenuLabels,
     ko: MenuLabels,
+    #[serde(rename = "zh-Hant")]
+    zh_hant: MenuLabels,
 }
 
 #[cfg(any(target_os = "macos", test))]
@@ -48,6 +50,7 @@ fn labels(language: UiLanguage) -> &'static MenuLabels {
         UiLanguage::English => &catalog.en,
         UiLanguage::Japanese => &catalog.ja,
         UiLanguage::Korean => &catalog.ko,
+        UiLanguage::TraditionalChinese => &catalog.zh_hant,
     }
 }
 
@@ -124,12 +127,19 @@ mod tests {
         assert_eq!(super::labels(UiLanguage::SimplifiedChinese).about, "关于 Oink");
         assert_eq!(super::labels(UiLanguage::Japanese).about, "Oink について");
         assert_eq!(super::labels(UiLanguage::Korean).about, "Oink에 관하여");
+        assert_eq!(super::labels(UiLanguage::TraditionalChinese).about, "關於 Oink");
     }
 
     #[test]
     fn native_menu_catalog_contains_every_complete_language() {
         let catalog = super::catalog();
-        for labels in [&catalog.en, &catalog.zh_hans, &catalog.ja, &catalog.ko] {
+        for labels in [
+            &catalog.en,
+            &catalog.zh_hans,
+            &catalog.ja,
+            &catalog.ko,
+            &catalog.zh_hant,
+        ] {
             assert!(!labels.quit.ends_with('…'), "native Quit has no follow-up dialog");
             for label in [
                 &labels.about,

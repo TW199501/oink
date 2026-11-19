@@ -1,6 +1,7 @@
 //! Windows：用 GDI 把一行字画进内存位图。
 //!
-//! 字体「Microsoft YaHei UI」（微软雅黑，Windows 自带的简体中文界面字体，拉丁与数字的字形与 Segoe UI 相近）。
+//! 字体「Microsoft YaHei UI」（微软雅黑，Windows 自带的简体中文界面字体，拉丁与数字的字形与 Segoe UI 相近）；
+//! 界面语言为繁体中文时用「Microsoft JhengHei UI」（微软正黑体）。
 //! Transparent overlays use grayscale coverage. Toasts instead draw native
 //! ClearType directly onto their opaque card/button fill: RGB edge coverage and
 //! the system's color-dependent smoothing must not be flattened into a mask.
@@ -60,7 +61,11 @@ impl Font {
                 CLIP_DEFAULT_PRECIS,
                 quality,
                 0,
-                w!("Microsoft YaHei UI"),
+                if super::traditional_han() {
+                    w!("Microsoft JhengHei UI")
+                } else {
+                    w!("Microsoft YaHei UI")
+                },
             );
             if font.is_invalid() {
                 let _ = DeleteDC(dc);
@@ -84,8 +89,9 @@ impl Drop for Font {
 
 /// cap 高与字身的比例：量「H」的墨迹高度（按字重各算一次）。
 fn cap_ratio(bold: bool, medium: u8) -> Option<f64> {
-    static RATIO: [OnceLock<Option<f64>>; 6] = [const { OnceLock::new() }; 6];
-    *RATIO[usize::from(bold) + usize::from(medium) * 2].get_or_init(|| {
+    static RATIO: [OnceLock<Option<f64>>; 12] = [const { OnceLock::new() }; 12];
+    let index = usize::from(bold) + usize::from(medium) * 2 + usize::from(super::traditional_han()) * 6;
+    *RATIO[index].get_or_init(|| {
         let f = Font::new(bold, 200.0, medium)?;
         let mut gm = GLYPHMETRICS::default();
         let identity = MAT2 {

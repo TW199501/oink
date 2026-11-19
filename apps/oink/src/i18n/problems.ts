@@ -48,17 +48,18 @@ export function problemText(code: string): string {
   return tr(PROBLEMS[code] ?? '不可用');
 }
 
+/** Per kind: Simplified title, English title, Simplified description, English description, Traditional title, Traditional description. */
 export const startupMessages = {
-  waiting: ['正在等待 Oink 服务启动…', 'Waiting for the Oink service to start…', '电脑刚开机或刚装好 Oink 时，服务需要一点时间准备。准备好后会自动连接，不用做任何操作', "Right after startup or installation, the service needs a moment to get ready. Oink connects automatically when it’s ready"],
-  missing: ['Oink 服务没有安装', "The Oink service isn't installed", 'Oink 需要的系统服务不在这台电脑上，可能是安装没有完成。请下载最新安装包，重新安装 Oink', "A system service Oink needs isn't on this PC. Download the latest installer and reinstall Oink"],
-  stopped: ['Oink 服务已停止', 'The Oink service is stopped', '请打开「服务」，找到 OinkInput 并启动它。服务就绪后，Oink 会自动连接。如果还是不行，请重新安装 Oink', 'Open Services, find OinkInput and start it. Oink will connect automatically when the service is ready. If that doesn’t help, reinstall Oink'],
-  disabled: ['Oink 服务已被禁用', 'The Oink service is disabled', '请打开「服务」，把 OinkInput 的启动类型改为「自动」并启动它。服务就绪后，Oink 会自动连接', 'In Services, set OinkInput to Automatic and start it. Oink will connect automatically when the service is ready'],
-  session: ['请在这台电脑前登录后使用', 'Sign in at this PC to use Oink', '这个登录会话已断开，或电脑已切换到其他用户，Oink 暂时不能在这里运行。回到这台电脑前登录后会自动重试', 'This session is disconnected or another user is active. Oink retries when this account is active again'],
-  update: ['上次更新没有完成', "The last update didn't finish", '运行最新安装包可以修复这个问题；如果仍然失败，请复制诊断信息发给我们', 'Run the latest installer to repair the installation. If it still fails, copy the diagnostic info and send it to us'],
-  rdp: ['远程桌面期间共享已暂停', 'Sharing is paused during Remote Desktop', '回到本机登录后自动恢复', 'It resumes automatically when you sign in at this PC again'],
-  exited: ['Oink 后台启动后意外退出', "Oink's background process quit unexpectedly", '这通常是偶发问题，请点「重试」。如果反复出现，请复制诊断信息发给我们', 'Click Retry. If this keeps happening, copy the diagnostic info and send it to us'],
-  identity: ['Oink 服务身份验证失败', 'Oink service identity verification failed', '请复制诊断信息发给我们', 'Copy the diagnostic info and send it to us'],
-  unknown: ['无法连接 Oink 后台', 'Unable to connect to the Oink background process', '请复制诊断信息发给我们', 'Copy the diagnostic info and send it to us'],
+  waiting: ['正在等待 Oink 服务启动…', 'Waiting for the Oink service to start…', '电脑刚开机或刚装好 Oink 时，服务需要一点时间准备。准备好后会自动连接，不用做任何操作', "Right after startup or installation, the service needs a moment to get ready. Oink connects automatically when it’s ready", '正在等待 Oink 服務啟動…', '電腦剛開機或剛裝好 Oink 時，服務需要一點時間準備。準備好後會自動連線，不用做任何操作'],
+  missing: ['Oink 服务没有安装', "The Oink service isn't installed", 'Oink 需要的系统服务不在这台电脑上，可能是安装没有完成。请下载最新安装包，重新安装 Oink', "A system service Oink needs isn't on this PC. Download the latest installer and reinstall Oink", 'Oink 服務沒有安裝', 'Oink 需要的系統服務不在這台電腦上，可能是安裝沒有完成。請下載最新安裝程式，重新安裝 Oink'],
+  stopped: ['Oink 服务已停止', 'The Oink service is stopped', '请打开「服务」，找到 OinkInput 并启动它。服务就绪后，Oink 会自动连接。如果还是不行，请重新安装 Oink', 'Open Services, find OinkInput and start it. Oink will connect automatically when the service is ready. If that doesn’t help, reinstall Oink', 'Oink 服務已停止', '請開啟「服務」，找到 OinkInput 並啟動它。服務就緒後，Oink 會自動連線。如果還是不行，請重新安裝 Oink'],
+  disabled: ['Oink 服务已被禁用', 'The Oink service is disabled', '请打开「服务」，把 OinkInput 的启动类型改为「自动」并启动它。服务就绪后，Oink 会自动连接', 'In Services, set OinkInput to Automatic and start it. Oink will connect automatically when the service is ready', 'Oink 服務已被停用', '請開啟「服務」，把 OinkInput 的啟動類型改為「自動」並啟動它。服務就緒後，Oink 會自動連線'],
+  session: ['请在这台电脑前登录后使用', 'Sign in at this PC to use Oink', '这个登录会话已断开，或电脑已切换到其他用户，Oink 暂时不能在这里运行。回到这台电脑前登录后会自动重试', 'This session is disconnected or another user is active. Oink retries when this account is active again', '請在這台電腦前登入後使用', '這個登入工作階段已中斷，或電腦已切換到其他使用者，Oink 暫時無法在這裡執行。回到這台電腦前登入後會自動重試'],
+  update: ['上次更新没有完成', "The last update didn't finish", '运行最新安装包可以修复这个问题；如果仍然失败，请复制诊断信息发给我们', 'Run the latest installer to repair the installation. If it still fails, copy the diagnostic info and send it to us', '上次更新沒有完成', '執行最新安裝程式可以修復這個問題；如果仍然失敗，請複製診斷資訊傳給我們'],
+  rdp: ['远程桌面期间共享已暂停', 'Sharing is paused during Remote Desktop', '回到本机登录后自动恢复', 'It resumes automatically when you sign in at this PC again', '遠端桌面期間已暫停共享', '回到本機登入後自動恢復'],
+  exited: ['Oink 后台启动后意外退出', "Oink's background process quit unexpectedly", '这通常是偶发问题，请点「重试」。如果反复出现，请复制诊断信息发给我们', 'Click Retry. If this keeps happening, copy the diagnostic info and send it to us', 'Oink 背景服務啟動後意外結束', '這通常是偶發問題，請按「重試」。如果反覆出現，請複製診斷資訊傳給我們'],
+  identity: ['Oink 服务身份验证失败', 'Oink service identity verification failed', '请复制诊断信息发给我们', 'Copy the diagnostic info and send it to us', 'Oink 服務身分驗證失敗', '請複製診斷資訊傳給我們'],
+  unknown: ['无法连接 Oink 后台', 'Unable to connect to the Oink background process', '请复制诊断信息发给我们', 'Copy the diagnostic info and send it to us', '無法連線到 Oink 背景服務', '請複製診斷資訊傳給我們'],
 } as const;
 export function startupKind(raw: string): keyof typeof startupMessages {
   if (raw.startsWith('waiting:')) return 'waiting';
