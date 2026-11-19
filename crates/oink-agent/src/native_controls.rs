@@ -25,49 +25,73 @@ pub struct Model {
 
 fn label(language: UiLanguage, id: &str) -> &'static str {
     let text = match id {
-        "keyboard" => ["Keyboard", "键盘", "キーボード", "키보드"],
-        "mouse" => ["Mouse", "鼠标", "マウス", "마우스"],
-        "game" => ["Game mode", "游戏模式", "ゲームモード", "게임 모드"],
-        "microphone" => ["Microphone", "麦克风", "マイク", "마이크"],
-        "audio" => ["Audio", "音频", "オーディオ", "오디오"],
-        "keyboard-disabled" | "mouse-disabled" => ["Disabled", "禁用", "無効", "비활성화"],
-        "keyboard-local" | "mouse-local" | "audio-local" | "microphone-local" => ["Local", "本地", "ローカル", "로컬"],
-        "keyboard-shared" | "mouse-shared" | "microphone-shared" => ["Shared", "共享", "共有", "공유"],
-        "game-auto" => ["Automatic", "自动", "自動", "자동"],
-        "game-on" => ["On", "开启", "オン", "켜기"],
-        "game-off" => ["Off", "关闭", "オフ", "끄기"],
-        "audio-forward" => ["Forward", "转发", "転送", "전달"],
-        "audio-exit" => ["Audio exit", "出口", "音声出力先", "오디오 출력"],
-        "lock" => ["Lock pointer", "锁定指针", "ポインターをロック", "포인터 잠금"],
+        "keyboard" => ["Keyboard", "键盘", "キーボード", "키보드", "鍵盤"],
+        "mouse" => ["Mouse", "鼠标", "マウス", "마우스", "滑鼠"],
+        "game" => ["Game mode", "游戏模式", "ゲームモード", "게임 모드", "遊戲模式"],
+        "microphone" => ["Microphone", "麦克风", "マイク", "마이크", "麥克風"],
+        "audio" => ["Audio", "音频", "オーディオ", "오디오", "音訊"],
+        "keyboard-disabled" | "mouse-disabled" => ["Disabled", "禁用", "無効", "비활성화", "停用"],
+        "keyboard-local" | "mouse-local" | "audio-local" | "microphone-local" => {
+            ["Local", "本地", "ローカル", "로컬", "本地"]
+        }
+        "keyboard-shared" | "mouse-shared" | "microphone-shared" => ["Shared", "共享", "共有", "공유", "共享"],
+        "game-auto" => ["Automatic", "自动", "自動", "자동", "自動"],
+        "game-on" => ["On", "开启", "オン", "켜기", "開啟"],
+        "game-off" => ["Off", "关闭", "オフ", "끄기", "關閉"],
+        "audio-forward" => ["Forward", "转发", "転送", "전달", "轉送"],
+        "audio-exit" => ["Audio exit", "出口", "音声出力先", "오디오 출력", "出口"],
+        "lock" => [
+            "Lock pointer",
+            "锁定指针",
+            "ポインターをロック",
+            "포인터 잠금",
+            "鎖定指標",
+        ],
         "unlock" => [
             "Unlock pointer",
             "解锁指针",
             "ポインターのロックを解除",
             "포인터 잠금 해제",
+            "解鎖指標",
         ],
         "hide-screens" => [
             "Hide all screens",
             "隐藏全部屏幕",
             "すべての画面を隠す",
             "모든 화면 숨기기",
+            "隱藏全部螢幕",
         ],
         "show-screens" => [
             "Show all screens",
             "显示全部屏幕",
             "すべての画面を表示",
             "모든 화면 표시",
+            "顯示全部螢幕",
         ],
-        "pause" => ["Pause sharing", "暂停共享", "共有を一時停止", "공유 일시 중지"],
-        "resume" => ["Resume sharing", "恢复共享", "共有を再開", "공유 재개"],
-        "show" => ["Show main window", "显示主界面", "メインウインドウを表示", "주 창 표시"],
-        "about" => ["About Oink", "关于 Oink", "Oink について", "Oink 정보"],
-        "quit" => ["Quit Oink", "退出 Oink", "Oink を終了", "Oink 종료"],
-        _ => ["", "", "", ""],
+        "pause" => [
+            "Pause sharing",
+            "暂停共享",
+            "共有を一時停止",
+            "공유 일시 중지",
+            "暫停共享",
+        ],
+        "resume" => ["Resume sharing", "恢复共享", "共有を再開", "공유 재개", "恢復共享"],
+        "show" => [
+            "Show main window",
+            "显示主界面",
+            "メインウインドウを表示",
+            "주 창 표시",
+            "顯示主畫面",
+        ],
+        "about" => ["About Oink", "关于 Oink", "Oink について", "Oink 정보", "關於 Oink"],
+        "quit" => ["Quit Oink", "退出 Oink", "Oink を終了", "Oink 종료", "結束 Oink"],
+        _ => ["", "", "", "", ""],
     };
     text[match language {
         UiLanguage::SimplifiedChinese => 1,
         UiLanguage::Japanese => 2,
         UiLanguage::Korean => 3,
+        UiLanguage::TraditionalChinese => 4,
         _ => 0,
     }]
 }
@@ -728,6 +752,7 @@ mod startup_menu_tests {
             UiLanguage::SimplifiedChinese,
             UiLanguage::Japanese,
             UiLanguage::Korean,
+            UiLanguage::TraditionalChinese,
         ] {
             let menu = disconnected_model(language);
             assert!(menu.groups.is_empty());

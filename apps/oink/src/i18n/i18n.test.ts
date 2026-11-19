@@ -17,17 +17,22 @@ describe('automatic language', () => {
   it.each(['ko', 'ko-KR', 'ko_KP', 'ko-Kore-KR'])('maps %s to Korean', system => {
     expect(resolveLanguage('auto', system)).toBe('ko');
   });
-  it.each(['zh-Hant', 'zh-Hant-CN', 'zh-TW', 'zh-HK', 'zh-MO', 'zh-Hant-HK', 'en-US', 'fr', '', 'zhx', 'zh-XX', 'jav', 'kok'])('maps %s to English', system => {
+  it.each(['zh-Hant', 'zh-Hant-CN', 'zh-TW', 'zh-HK', 'zh-MO', 'zh-Hant-HK', 'zh_tw', 'ZH-Hant-TW'])('maps %s to Traditional Chinese', system => {
+    expect(resolveLanguage('auto', system)).toBe('zh-Hant');
+  });
+  it.each(['en-US', 'fr', '', 'zhx', 'zh-XX', 'jav', 'kok'])('maps %s to English', system => {
     expect(resolveLanguage('auto', system)).toBe('en');
   });
   it('honors preferred-language order and explicit choices', () => {
     expect(resolveLanguage('auto', ['en-US', 'zh-CN'])).toBe('en');
     expect(resolveLanguage('auto', ['zh-CN', 'en-US'])).toBe('zh-Hans');
     expect(resolveLanguage('auto', ['ja-JP', 'en-US'])).toBe('ja');
-    expect(resolveLanguage('auto', ['zh-Hant', 'zh-CN'])).toBe('en');
+    expect(resolveLanguage('auto', ['zh-Hant', 'zh-CN'])).toBe('zh-Hant');
+    expect(resolveLanguage('auto', ['zh-CN', 'zh-TW'])).toBe('zh-Hans');
     expect(resolveLanguage('auto', [])).toBe('en');
     expect(resolveLanguage('en', ['zh-CN'])).toBe('en');
     expect(resolveLanguage('zh-Hans', ['en-US'])).toBe('zh-Hans');
+    expect(resolveLanguage('zh-Hant', ['zh-CN'])).toBe('zh-Hant');
     expect(resolveLanguage('ja', ['en-US'])).toBe('ja');
     expect(resolveLanguage('ko', ['ja-JP'])).toBe('ko');
   });
@@ -76,6 +81,11 @@ describe('catalog completeness', () => {
       expect(form, key).not.toMatch(/\{\d+\}(?:을|를|이|가|은|는|와|과|으로|로)(?![가-힣])/u);
     }
   });
+  it('writes Traditional Chinese without Simplified-only characters', () => {
+    // Common characters whose Simplified form differs from the Traditional one.
+    const simplified = /[这为个时开关门们说话对发机设网络图标键录频视输复贴将无删资过还选择显认证软载达动态应该备组连闭启项码页]/u;
+    for (const key of keys) for (const form of forms(CATALOGS['zh-Hant'][key])) expect(form, key).not.toMatch(simplified);
+  });
   it('translates Japanese instead of reusing the Chinese source', () => {
     // Identical Han words in both languages.
     const same = new Set(['音量', '管理', '警告', '保存', '最小化', '最大化', '{0} 秒前', '（{0}）', '、']);
@@ -86,13 +96,14 @@ describe('catalog completeness', () => {
   });
 });
 
-describe.each(['en', 'zh-Hans', 'ja', 'ko'] as const)('counted messages in %s', language => {
+describe.each(['en', 'zh-Hans', 'zh-Hant', 'ja', 'ko'] as const)('counted messages in %s', language => {
   it.each([0, 1, 2, 1.5])('agrees with a count of %s', count => {
     setLanguage(language);
     const plural = count === 1 ? '' : 's';
     const expected = {
       en: [`Latency ${count} millisecond${plural}`, `${count} second${plural} ago`, `minute${plural}`, `${count} operation${plural} ${count === 1 ? 'is' : 'are'} still pending and will be interrupted.`],
       'zh-Hans': [`延迟 ${count} 毫秒`, `${count} 秒前`, '分钟', `还有 ${count} 项操作未完成，退出会中断它们。`],
+      'zh-Hant': [`延遲 ${count} 毫秒`, `${count} 秒前`, '分鐘', `還有 ${count} 項操作未完成，結束會中斷這些操作。`],
       ja: [`遅延 ${count} ミリ秒`, `${count} 秒前`, '分', `完了していない操作が ${count} 件あります。終了すると中断されます。`],
       ko: [`지연 시간 ${count}밀리초`, `${count}초 전`, '분', `완료되지 않은 작업이 ${count}개 있습니다. 종료하면 중단됩니다.`],
     }[language];
@@ -104,7 +115,7 @@ describe.each(['en', 'zh-Hans', 'ja', 'ko'] as const)('counted messages in %s', 
   });
   it('shows the context-free source text and its translation', () => {
     setLanguage(language);
-    expect(tr('state|关闭')).toBe({ en: 'Off', 'zh-Hans': '关闭', ja: 'オフ', ko: '끔' }[language]);
+    expect(tr('state|关闭')).toBe({ en: 'Off', 'zh-Hans': '关闭', 'zh-Hant': '關閉', ja: 'オフ', ko: '끔' }[language]);
   });
 });
 
@@ -124,7 +135,9 @@ it('formats numbers, lists and language names for the active language', () => {
 });
 
 it('lists every language under its own name, with a secondary name only when it differs', () => {
-  expect(LANGUAGES.map(l => l.autonym)).toEqual(['简体中文', 'English', '日本語', '한국어']);
+  expect(LANGUAGES.map(l => l.autonym)).toEqual(['简体中文', '繁體中文', 'English', '日本語', '한국어']);
   setLanguage('ko');
-  expect(LANGUAGES.map(secondaryName)).toEqual(['중국어(간체)', '영어', '일본어', undefined]);
+  expect(LANGUAGES.map(secondaryName)).toEqual(['중국어(간체)', '중국어(번체)', '영어', '일본어', undefined]);
+  setLanguage('zh-Hant');
+  expect(secondaryName(LANGUAGES[1])).toBeUndefined();
 });

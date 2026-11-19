@@ -433,7 +433,9 @@ impl Node {
         }
     }
     fn notification_language(&self) -> crate::config::UiLanguage {
-        self.settings().ui_language.resolve(&system_language())
+        let language = self.settings().ui_language.resolve(&system_language());
+        oink_locator::text::set_traditional_han(language == crate::config::UiLanguage::TraditionalChinese);
+        language
     }
     fn notification_click(&self, click: Click) {
         let origin = { lock(&self.inner.notifications).origins.remove(&click.id) };
@@ -794,6 +796,7 @@ fn disable_hint(language: crate::config::UiLanguage, kind: u8, mac: bool) -> Str
         .join("+");
     match language {
         SimplifiedChinese => format!("按住 {chord} 1 秒解除"),
+        TraditionalChinese => format!("按住 {chord} 1 秒解除"),
         Japanese => format!("{chord} を1秒間押し続けると解除"),
         Korean => format!("{chord} 키를 1초 동안 눌러 해제"),
         _ => format!("Hold {chord} for 1 second to re-enable"),
@@ -814,6 +817,17 @@ fn copy(language: crate::config::UiLanguage, kind: u8) -> &'static str {
             "指针锁定已解除",
             "共享麦克风已静音",
             "共享麦克风已解除静音",
+        ][index],
+        TraditionalChinese => [
+            "復原",
+            "已進入遊戲模式",
+            "已離開遊戲模式",
+            "已鎖定指標",
+            "已停用本機鍵盤",
+            "已停用本機滑鼠",
+            "指標鎖定已解除",
+            "共享麥克風已靜音",
+            "共享麥克風已解除靜音",
         ][index],
         Japanese => [
             "元に戻す",
@@ -898,6 +912,7 @@ mod tests {
             (English, "Hold Ctrl+Alt+Shift+U for 1 second to re-enable"),
             (Japanese, "Ctrl+Alt+Shift+U を1秒間押し続けると解除"),
             (Korean, "Ctrl+Alt+Shift+U 키를 1초 동안 눌러 해제"),
+            (TraditionalChinese, "按住 Ctrl+Alt+Shift+U 1 秒解除"),
         ] {
             for kind in [4, 5] {
                 assert_eq!(disable_hint(language, kind, false), expected);
@@ -1039,6 +1054,7 @@ mod tests {
         for (language, muted, unmuted) in [
             (English, "Shared microphone muted", "Shared microphone unmuted"),
             (SimplifiedChinese, "共享麦克风已静音", "共享麦克风已解除静音"),
+            (TraditionalChinese, "共享麥克風已靜音", "共享麥克風已解除靜音"),
             (
                 Japanese,
                 "共有マイクをミュートしました",
@@ -1457,6 +1473,7 @@ mod tests {
             (English, "Pointer lock released"),
             (Japanese, "ポインターのロックを解除しました"),
             (Korean, "포인터 잠금이 해제되었습니다"),
+            (TraditionalChinese, "指標鎖定已解除"),
         ] {
             assert_eq!(copy(language, 6), expected);
         }

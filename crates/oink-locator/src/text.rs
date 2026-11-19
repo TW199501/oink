@@ -13,7 +13,20 @@
 //! [`StrokeText`] 是不依赖系统的后备（只有数字、拉丁字母和几个符号的线段字形）：单元测试用它保证逐像素
 //! 确定，系统字体创建失败时也退到它。
 
+use std::sync::atomic::{AtomicBool, Ordering};
+
 use super::raster::{Canvas, Color, over};
+
+static TRADITIONAL_HAN: AtomicBool = AtomicBool::new(false);
+
+/// 设定中文字形：`true` 用繁体中文（台湾）界面字体，`false` 用简体中文界面字体。之后画的文字生效。
+pub fn set_traditional_han(traditional: bool) {
+    TRADITIONAL_HAN.store(traditional, Ordering::Relaxed);
+}
+
+pub(crate) fn traditional_han() -> bool {
+    TRADITIONAL_HAN.load(Ordering::Relaxed)
+}
 
 /// 一行字的覆盖率图（每像素 0–255），`w × h`。
 #[derive(Clone, Debug, Default, PartialEq)]

@@ -12,7 +12,7 @@ use crate::ipc::{BuildIdentity, Client, OtherBuild};
 unsafe extern "C" {
     fn oink_startup_alert(
         screen: c_int,
-        zh: bool,
+        lang: c_int,
         exit_code: c_int,
         detail: *const c_char,
         version: *const c_char,
@@ -84,12 +84,16 @@ fn alert(kind: i32, detail: &str, exit: Option<&BackendExit>) -> bool {
         .firstObject()
         .map_or_else(String::new, |s| s.to_string());
     let lang = AgentConfig::load().map_or(UiLanguage::Auto, |c| c.settings.ui_language);
-    let zh = lang.resolve(&system) == UiLanguage::SimplifiedChinese;
+    let lang = match lang.resolve(&system) {
+        UiLanguage::SimplifiedChinese => 1,
+        UiLanguage::TraditionalChinese => 2,
+        _ => 0,
+    };
     // SAFETY: strings remain live through the synchronous main-thread modal.
     unsafe {
         oink_startup_alert(
             kind,
-            zh,
+            lang,
             exit.map_or(-1, |e| i32::from(e.0)),
             detail.as_ptr(),
             version.as_ptr(),

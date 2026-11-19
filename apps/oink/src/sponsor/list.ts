@@ -14,6 +14,7 @@ export interface SponsorItem {
   action: { type: 'link'; url: string } | { type: 'qr'; image: string; caption?: LocalizedText | null };
 }
 export function localized(text: LocalizedText, language: Language): string {
+  if (language === 'zh-Hant') return text.default;
   return text.locales?.[language === 'zh-Hans' ? 'zh' : language] ?? text.default;
 }
 export const fallbackItems: SponsorItem[] = [

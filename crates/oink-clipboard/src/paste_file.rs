@@ -92,7 +92,13 @@ pub fn text_bytes(text: &str, windows: bool) -> Vec<u8> {
     }
 }
 pub fn stem(kind: Kind, language: &str, timestamp: &str) -> String {
-    let labels = match language.split('-').next().unwrap_or(language) {
+    let mut tags = language.split(['-', '_']);
+    let base = tags.next().unwrap_or(language);
+    let traditional = tags
+        .next()
+        .is_some_and(|tag| ["Hant", "TW", "HK", "MO"].iter().any(|t| tag.eq_ignore_ascii_case(t)));
+    let labels = match base {
+        "zh" if traditional => ["貼上的圖片", "貼上的格式化文字", "貼上的文字"],
         "zh" => ["粘贴的图片", "粘贴的富文本", "粘贴的文本"],
         "ja" => ["貼り付けた画像", "貼り付けたリッチテキスト", "貼り付けたテキスト"],
         "ko" => ["붙여넣은 이미지", "붙여넣은 서식 있는 텍스트", "붙여넣은 텍스트"],
@@ -416,6 +422,9 @@ mod tests {
             ("en", "Pasted image"),
             ("ja", "貼り付けた画像"),
             ("ko", "붙여넣은 이미지"),
+            ("zh-Hans", "粘贴的图片"),
+            ("zh-Hant", "貼上的圖片"),
+            ("zh-TW", "貼上的圖片"),
         ] {
             assert_eq!(
                 stem(Kind::Image, language, "2026-11-06 09.30.12"),

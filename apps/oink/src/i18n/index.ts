@@ -5,6 +5,7 @@ import type { Catalog, Message, MessageKey } from './catalog';
 import { en } from './messages/en';
 import { ja } from './messages/ja';
 import { ko } from './messages/ko';
+import { zhTW } from './messages/zh_TW';
 import { resolveLanguage } from './languages';
 import type { Language, LanguageChoice } from './languages';
 
@@ -14,7 +15,7 @@ export type { Catalog, Message, MessageKey, PluralMessage } from './catalog';
 export { problemText } from './problems';
 
 /** Translations of the Simplified Chinese source keys. */
-export const CATALOGS: { readonly [L in Exclude<Language, 'zh-Hans'>]: Catalog } = { en, ja, ko };
+export const CATALOGS: { readonly [L in Exclude<Language, 'zh-Hans'>]: Catalog } = { 'zh-Hant': zhTW, en, ja, ko };
 
 declare global {
   interface Window { __OINK_SYSTEM_LANGUAGES__?: readonly string[] }

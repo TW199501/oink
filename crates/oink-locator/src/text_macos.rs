@@ -92,7 +92,7 @@ fn cf_string(s: &str) -> Option<Owned> {
 }
 
 fn font(bold: bool, size: f64, medium: u8) -> Option<Owned> {
-    let language = cf_string("zh-Hans")?;
+    let language = cf_string(if super::traditional_han() { "zh-Hant" } else { "zh-Hans" })?;
     let kind = if bold { UI_EMPHASIZED } else { UI_SYSTEM };
     // SAFETY: 系统定义的界面字体类型；语言是有效的 CFString。
     let base = Owned::new(unsafe { CTFontCreateUIFontForLanguage(kind, size, language.0) })?;
@@ -135,8 +135,9 @@ fn font(bold: bool, size: f64, medium: u8) -> Option<Owned> {
 
 /// cap 高与字号的比例（按字重各算一次）。
 fn cap_ratio(bold: bool, medium: u8) -> Option<f64> {
-    static RATIO: [OnceLock<Option<f64>>; 6] = [const { OnceLock::new() }; 6];
-    *RATIO[usize::from(bold) + usize::from(medium) * 2].get_or_init(|| {
+    static RATIO: [OnceLock<Option<f64>>; 12] = [const { OnceLock::new() }; 12];
+    let index = usize::from(bold) + usize::from(medium) * 2 + usize::from(super::traditional_han()) * 6;
+    *RATIO[index].get_or_init(|| {
         let f = font(bold, 100.0, medium)?;
         // SAFETY: 有效的 CTFont。
         let cap = unsafe { CTFontGetCapHeight(f.0) };

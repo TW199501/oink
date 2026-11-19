@@ -62,7 +62,7 @@ class MacLocalizations(unittest.TestCase):
                 C.verify_localizations(bundle, info, permissions)
                 with self.assertRaisesRegex(RuntimeError, 'must declare'):
                     C.verify_localizations(bundle, {**info, 'CFBundleLocalizations': ['en']}, permissions)
-                for language in ['zh-Hans', 'ja', 'ko']:
+                for language in ['zh-Hans', 'ja', 'ko', 'zh-Hant']:
                     resource = bundle / f'Contents/Resources/{language}.lproj/InfoPlist.strings'
                     original = resource.read_bytes()
                     resource.unlink()
@@ -81,7 +81,7 @@ class MacLocalizations(unittest.TestCase):
             write_localizations(bundle, permissions=True)
             info = {**DECLARATIONS, **STRINGS['en']}
             self.assertEqual(list(STRINGS), DECLARATIONS['CFBundleLocalizations'])
-            for language in ['zh-Hans', 'ja', 'ko']:
+            for language in ['zh-Hans', 'ja', 'ko', 'zh-Hant']:
                 for key in ['NSAudioCaptureUsageDescription', 'NSLocalNetworkUsageDescription']:
                     self.assertNotEqual(STRINGS['en'][key], STRINGS[language][key])
             with self.assertRaisesRegex(RuntimeError, 'fallback'):

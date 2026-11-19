@@ -70,12 +70,14 @@ pub enum UiLanguage {
     Japanese,
     #[serde(rename = "ko")]
     Korean,
+    #[serde(rename = "zh-Hant")]
+    TraditionalChinese,
 }
 impl UiLanguage {
     /// Map `Auto` and the system's first preferred language to a UI language:
     /// any Japanese or Korean tag selects that language, zh/zh-Hans/zh-CN/zh-SG
-    /// select Simplified Chinese, and everything else (Traditional Chinese
-    /// included) is English. The web UI applies the same rule.
+    /// select Simplified Chinese, zh-Hant/zh-TW/zh-HK/zh-MO select Traditional
+    /// Chinese, and everything else is English. The web UI applies the same rule.
     pub fn resolve(self, system_language: &str) -> Self {
         match self {
             Self::Auto => {
@@ -87,13 +89,15 @@ impl UiLanguage {
                 if base.eq_ignore_ascii_case("ko") {
                     return Self::Korean;
                 }
-                let simplified = parts.next().is_none_or(|v| {
-                    ["Hans", "CN", "SG"]
-                        .iter()
-                        .any(|allowed| v.eq_ignore_ascii_case(allowed))
-                });
-                if base.eq_ignore_ascii_case("zh") && simplified {
+                if !base.eq_ignore_ascii_case("zh") {
+                    return Self::English;
+                }
+                let qualifier = parts.next();
+                let any = |tags: &[&str]| qualifier.is_some_and(|v| tags.iter().any(|t| v.eq_ignore_ascii_case(t)));
+                if qualifier.is_none() || any(&["Hans", "CN", "SG"]) {
                     Self::SimplifiedChinese
+                } else if any(&["Hant", "TW", "HK", "MO"]) {
+                    Self::TraditionalChinese
                 } else {
                     Self::English
                 }
@@ -195,7 +199,7 @@ mod tests {
         assert_eq!(LogMaxMb::default().bytes(), 1_024_000_000);
         assert!(serde_json::from_str::<LogMaxMb>("0").is_err());
         assert_eq!(LogMaxMb::try_from(u32::MAX).unwrap().bytes(), 4_294_967_295_000_000);
-        assert_eq!(UiLanguage::Auto.resolve("zh-TW"), UiLanguage::English);
+        assert_eq!(UiLanguage::Auto.resolve("zh-TW"), UiLanguage::TraditionalChinese);
         assert_eq!(UiLanguage::Auto.resolve("fr"), UiLanguage::English);
         assert_eq!(EmergencyHoldMs::default().get(), 5000);
         assert!(EmergencyHoldMs::try_from(1000).is_err());
@@ -243,14 +247,21 @@ mod tests {
             "zh-HK",
             "zh-MO",
             "zh-Hant-HK",
-            "en-US",
-            "fr",
-            "",
-            "zhx",
-            "zh-XX",
+            "zh_tw",
         ] {
+            assert_eq!(
+                UiLanguage::Auto.resolve(locale),
+                UiLanguage::TraditionalChinese,
+                "{locale}"
+            );
+        }
+        for locale in ["en-US", "fr", "", "zhx", "zh-XX"] {
             assert_eq!(UiLanguage::Auto.resolve(locale), UiLanguage::English, "{locale}");
         }
+        assert_eq!(
+            serde_json::from_str::<UiLanguage>("\"zh-Hant\"").unwrap(),
+            UiLanguage::TraditionalChinese
+        );
         assert_eq!(UiLanguage::English.resolve("zh-CN"), UiLanguage::English);
         assert_eq!(
             UiLanguage::SimplifiedChinese.resolve("en-US"),
