@@ -2441,6 +2441,11 @@ Copyright (c) 2023 Boshen
 Copyright (c) 2024-present VoidZero Inc. & Contributors
 Full terms: licenses/texts/95ced5ecf1133fbf41d409b5555c86c344f83f3b019926057ddbc07cfdcc27b3.txt
 
+@playwright/test 1.56.1 (Apache-2.0)
+Portions Copyright 2017 Google Inc.
+Full terms: licenses/texts/45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb.txt
+Full terms: licenses/texts/6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d.txt
+
 @rolldown/binding-android-arm-eabi 1.2.14 (MIT)
 Copyright (c) 2017 [these people](https://github.com/rollup/rollup/graphs/contributors)
 Copyright (c) 2020 Evan Wallace
@@ -2766,6 +2771,10 @@ form-data 4.0.6 (MIT)
 Copyright (c) 2012 Felix Geisendörfer (felix@debuggable.com) and contributors
 Full terms: licenses/texts/e5b780d4f38d1d3328e3e53186c4e62d3fa149ea6f2bacd5de5ad0c30ac85343.txt
 
+fsevents 2.3.2 (MIT)
+Copyright (C) 2010-2020 by Philipp Dunkel, Ben Noordhuis, Elan Shankar, Paul Miller
+Full terms: licenses/texts/2a8a5d6197bb97a018b8a190dd3ed853d750ca87c8e80c17aad41d6c6ff448e1.txt
+
 fsevents 2.3.3 (MIT)
 Copyright (C) 2010-2020 by Philipp Dunkel, Ben Noordhuis, Elan Shankar, Paul Miller
 Full terms: licenses/texts/2a8a5d6197bb97a018b8a190dd3ed853d750ca87c8e80c17aad41d6c6ff448e1.txt
@@ -2918,6 +2927,156 @@ Full terms: licenses/texts/6582629e2979466878f6014313dcc2f3756c9616148682227ce30
 picomatch 4.0.7 (MIT)
 Copyright (c) 2017-present, Jon Schlinkert.
 Full terms: licenses/texts/d0cd141b0c322fded5dfad1d4645bb2fedfc05b7321fe1009469638190d59ef9.txt
+
+playwright-core 1.56.1 (Apache-2.0)
+* Copyright (c) 2003-2005  Tom Wu
+Copyright (C) 2011 by Beau Gunderson
+Copyright (C) 2016-2018 Rob Wu <rob@robwu.nl>
+Copyright (C) 2017 by Marijn Haverbeke <marijn@haverbeke.berlin> and others
+Copyright (c) 2007-present, Alexandru Mărășteanu <hello@alexei.ro>
+Copyright (c) 2009-2015, Kevin Decker <kpdecker@gmail.com>
+Copyright (c) 2010 Benjamin Thomas, Robert Kieffer
+Copyright (c) 2011 Einar Otto Stangvik <einaros@gmail.com>
+Copyright (c) 2011 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2011-2022 Isaac Z. Schlueter, Ben Noordhuis, and Contributors
+Copyright (c) 2011:
+Copyright (c) 2013 Arnout Kazemier and contributors
+Copyright (c) 2013 Brian J. Brennan
+Copyright (c) 2013 Josh Glazebrook
+Copyright (c) 2013 Julian Gruber &lt;julian@juliangruber.com&gt;
+Copyright (c) 2013 Julian Gruber <julian@juliangruber.com>
+Copyright (c) 2013 Nathan Rajlich &lt;nathan@tootallnate.net&gt;
+Copyright (c) 2013-2017 Josh Glazebrook
+Copyright (c) 2014 Andrew Kelley
+Copyright (c) 2014 Josh Wolfe
+Copyright (c) 2014 Mathias Buus
+Copyright (c) 2014, Eugene Ware
+Copyright (c) 2014-2017 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2015, Contributors
+Copyright (c) 2015, Scott Motte
+Copyright (c) 2016 Luigi Pinca and contributors
+Copyright (c) 2016 Zeit, Inc.
+Copyright (c) 2017 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2018-2021 Josh Junon
+Copyright (c) 2020 Vercel, Inc.
+Portions Copyright 2017 Google Inc.
+pngjs derived work Copyright (c) 2012 Kuba Niegowski
+pngjs2 original work Copyright (c) 2015 Luke Page & Original Contributors
+Full terms: licenses/texts/450299275b0e56be82eb14dbec79a2395dfe956f8e3c0a35f901163c4eef036e.txt
+Full terms: licenses/texts/45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb.txt
+Full terms: licenses/texts/6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d.txt
+
+playwright 1.56.1 (Apache-2.0)
+Copyright (C) 2011-2017 whitequark <whitequark@whitequark.org>
+Copyright (C) 2012-2014 by various contributors (see AUTHORS)
+Copyright (C) 2017 by Marijn Haverbeke <marijn@haverbeke.berlin> and others
+Copyright (c) 2009-2011, Mozilla Foundation and contributors
+Copyright (c) 2009-2014 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2010 Sencha Inc.
+Copyright (c) 2011 Alexander Shtuchkin
+Copyright (c) 2011 LearnBoost
+Copyright (c) 2011 TJ Holowaychuk
+Copyright (c) 2011-2016 Heather Arthur <fayearthur@gmail.com>
+Copyright (c) 2011-2022 Isaac Z. Schlueter, Ben Noordhuis, and Contributors
+Copyright (c) 2012 TJ Holowaychuk
+Copyright (c) 2012 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2012-2013 TJ Holowaychuk
+Copyright (c) 2012-2014 Federico Romero
+Copyright (c) 2012-2014 Isaac Z. Schlueter
+Copyright (c) 2012-2014 Roman Shtylman <shtylman@gmail.com>
+Copyright (c) 2012-2014 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2012-2018 Aseem Kishore, and [others].
+Copyright (c) 2012-2019 Paul Miller (https://paulmillr.com), Elan Shanker
+Copyright (c) 2012-2019 Thorsten Lorenz, Paul Miller (https://paulmillr.com)
+Copyright (c) 2012–2024 LearnBoost <tj@learnboost.com> and other contributors;
+Copyright (c) 2013 James Halliday
+Copyright (c) 2013 Jonathan Ong <me@jongleberry.com>
+Copyright (c) 2013 Raynos.
+Copyright (c) 2013 Roman Shtylman
+Copyright (c) 2013 Troy Goode <troygoode@gmail.com>
+Copyright (c) 2013-2014 Jonathan Ong <me@jongleberry.com>
+Copyright (c) 2013-2014 Roman Shtylman <shtylman+expressjs@gmail.com>
+Copyright (c) 2014 Blake Embrey (hello@blakeembrey.com)
+Copyright (c) 2014 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2014 Evan Wallace
+Copyright (c) 2014 Forbes Lindesay
+Copyright (c) 2014 Jonathan Ong <me@jongleberry.com>
+Copyright (c) 2014 Jonathan Ong me@jongleberry.com
+Copyright (c) 2014, 2015, 2016, 2017, 2018 Simon Lydell
+Copyright (c) 2014, Nathan LaFreniere and other [contributors](https://github.com/ljharb/qs/graphs/contributors)
+Copyright (c) 2014-2015 Douglas Christopher Wilson
+Copyright (c) 2014-2015 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2014-2016 Douglas Christopher Wilson
+Copyright (c) 2014-2016, Jon Schlinkert
+Copyright (c) 2014-2017 Douglas Christopher Wilson
+Copyright (c) 2014-2017 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2014-2017 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2014-2017, Jon Schlinkert.
+Copyright (c) 2014-2018 Douglas Christopher Wilson
+Copyright (c) 2014-2018, Jon Schlinkert.
+Copyright (c) 2014-2022 Douglas Christopher Wilson
+Copyright (c) 2014-2022 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2014-present Sebastian McKenzie and other contributors
+Copyright (c) 2014-present, Facebook, Inc. (ONLY ./src/helpers/regenerator* files)
+Copyright (c) 2014-present, Jon Schlinkert.
+Copyright (c) 2015 Andreas Lubbe
+Copyright (c) 2015 Dmitry Ivanov
+Copyright (c) 2015 Douglas Christopher Wilson
+Copyright (c) 2015 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2015 Jed Watson <jed.watson@me.com>
+Copyright (c) 2015 Tiancheng "Timothy" Gu
+Copyright (c) 2015, 2019 Elan Shanker
+Copyright (c) 2015, Wes Todd
+Copyright (c) 2015-2016 Douglas Christopher Wilson <doug@somethingdoug.com
+Copyright (c) 2015-2017 Evgeny Poberezkin
+Copyright (c) 2015-2022 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2015-present, Brian Woodward.
+Copyright (c) 2015-present, Jon Schlinkert.
+Copyright (c) 2016 Douglas Christopher Wilson
+Copyright (c) 2016 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2016 Douglas Christopher Wilson doug@somethingdoug.com
+Copyright (c) 2016 Jordan Harband
+Copyright (c) 2016 Thomas Watson Steen
+Copyright (c) 2016, 2018 Linus Unnebäck
+Copyright (c) 2016-2017 Douglas Christopher Wilson <doug@somethingdoug.com>
+Copyright (c) 2016-2022 Isaac Z. Schlueter <i@izs.me>, James Talmage <james@talmage.io> (github.com/jamestalmage), and Contributors
+Copyright (c) 2016-present, Jon Schlinkert.
+Copyright (c) 2017 Evgeny Poberezkin
+Copyright (c) 2017 Hunter Loftis <hunter@hunterloftis.com>
+Copyright (c) 2017 Sergey Rubanov (https://github.com/chicoxyzzy)
+Copyright (c) 2017-2023 Haydn Paterson (sinclair) <haydn.developer@gmail.com>
+Copyright (c) 2017-present, Jon Schlinkert.
+Copyright (c) 2018 Made With MOXY Lda <hello@moxy.studio>
+Copyright (c) 2018 Nikita Skovoroda <chalkerx@gmail.com>
+Copyright (c) 2018-2021 Josh Junon
+Copyright (c) 2019
+Copyright (c) 2019 Elan Shanker, Paul Miller (https://paulmillr.com)
+Copyright (c) 2019 Jordan Harband
+Copyright (c) 2019 Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com), Paul Miller (https://paulmillr.com)
+Copyright (c) 2020 Jordan Harband
+Copyright (c) 2020 Vercel, Inc.
+Copyright (c) 2020, Stefan Terdell
+Copyright (c) 2021-2024 Oleksii Raspopov, Kostiantyn Denysov, Anton Verinov
+Copyright (c) 2022 Jordan Harband
+Copyright (c) 2024 Anthropic, PBC
+Copyright (c) 2024 ECMAScript Shims
+Copyright (c) 2024 Jordan Harband
+Copyright (c) 2025 Colin McDonnell
+Copyright (c) 2025 Espen Hovlandsdal <espen@hovlandsdal.com>
+Copyright (c) 2025 Jordan Harband
+Copyright 2011 Gary Court. All rights reserved.
+Copyright 2013 Thorsten Lorenz.
+Copyright 2014 Andrey Sitnik <andrey@sitnik.ru> and other contributors
+Copyright 2018 Kilian Valkhof
+Copyright 2018 Logan Smyth <loganfsmyth@gmail.com>
+Copyright 2019 Justin Ridgewell <jridgewell@google.com>
+Copyright 2022 Andrey Sitnik <andrey@sitnik.ru> and other contributors
+Copyright 2023 Nathan Friedly, Vedant K
+Copyright 2024 Justin Ridgewell <justin@ridgewell.name>
+Portions Copyright 2017 Google Inc.
+Full terms: licenses/texts/2eba4794fdffd39b2f823cb562c394a175240210aa8df445a0b5d34bcdad2382.txt
+Full terms: licenses/texts/45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb.txt
+Full terms: licenses/texts/6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d.txt
 
 postcss 8.5.30 (MIT)
 Copyright 2013 Andrey Sitnik <andrey@sitnik.es>
